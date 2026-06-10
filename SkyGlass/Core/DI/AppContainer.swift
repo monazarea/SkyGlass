@@ -15,6 +15,10 @@ final class AppContainer {
             return WeatherServices(apiClient: ApiClient.shared)
     }()
         
+    private lazy var locationService: LocationServiceProtocol = {
+            return LocationService()
+    }()
+    
     private lazy var weatherRepository: WeatherRepositoryProtocol = {
             return WeatherRepository(networkService: weatherService)
     }()
@@ -23,7 +27,7 @@ final class AppContainer {
         return WeatherUseCase(repository: weatherRepository)
     }
     @MainActor func makeWeatherViewModel() -> WeatherViewModel {
-        return WeatherViewModel(weatherUseCase: makeWeatherUseCase())
+        return WeatherViewModel(weatherUseCase: makeWeatherUseCase(),locationService: locationService)
     }
     
 }

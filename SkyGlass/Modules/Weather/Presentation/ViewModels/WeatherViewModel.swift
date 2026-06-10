@@ -12,14 +12,26 @@ final class WeatherViewModel: ObservableObject {
     
     private let weatherUseCase : WeatherUseCaseProtocol
     private var currentCoordinates : Coordinate?
-    
-    init(weatherUseCase :WeatherUseCaseProtocol){
+    private var locationService : LocationServiceProtocol
+    init(weatherUseCase :WeatherUseCaseProtocol, locationService: LocationServiceProtocol){
         self.weatherUseCase = weatherUseCase
+        self.locationService = locationService
     }
     
     func onAppear(){
+        self.isLoading = true
         let defaultCoordinate = Coordinate(lat: 37.7749, lon: -122.4194) // San Francisco as default
-        fetchWeather(for: defaultCoordinate)
+        Task{
+            do{
+                let userCoordinate = try await locationService.getCurrentLocation()
+                fetchWeather(for: userCoordinate)
+            }catch{
+                fetchWeather(for: defaultCoordinate)
+                print("Location error: \(error.localizedDescription)")
+            }
+        }
+        
+        
     }
     
     func fetchWeather(for coordinate : Coordinate){
