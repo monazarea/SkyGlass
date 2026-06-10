@@ -1,0 +1,8 @@
+// SkyGlass.xcconfig
+// Main configuration file. It includes local overrides that are not committed.
+
+#include "SkyGlass-Local.xcconfig"
+
+// Default values
+BASE_URL = https://api.weatherapi.com/v1
+

@@ -7,11 +7,23 @@
 
 import Foundation
 final class AppContainer {
-    static let shared = AppContainer()
     
         
-    private init() {
+    init() {}
+    
+    private lazy var weatherService: WeatherServicesProtocol = {
+            return WeatherServices(apiClient: ApiClient.shared)
+    }()
         
+    private lazy var weatherRepository: WeatherRepositoryProtocol = {
+            return WeatherRepository(networkService: weatherService)
+    }()
+        
+    func makeWeatherUseCase() -> WeatherUseCaseProtocol {
+        return WeatherUseCase(repository: weatherRepository)
+    }
+    @MainActor func makeWeatherViewModel() -> WeatherViewModel {
+        return WeatherViewModel(weatherUseCase: makeWeatherUseCase())
     }
     
 }

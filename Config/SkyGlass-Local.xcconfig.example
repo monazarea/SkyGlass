@@ -1,0 +1,6 @@
+// SkyGlass-Local.xcconfig.example
+// Copy this file to Config/SkyGlass-Local.xcconfig and add your real secrets.
+// DO NOT commit Config/SkyGlass-Local.xcconfig
+
+// Put your actual API key here:
+API_KEY = YOUR_ACTUAL_API_KEY_HERE

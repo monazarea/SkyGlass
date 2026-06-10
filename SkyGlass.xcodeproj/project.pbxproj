@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C3F36F12FD8B00800A1DECC /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36F02FD8B00800A1DECC /* WeatherResponse.swift */; };
+		0C3F36F32FD8B4C900A1DECC /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36F22FD8B4C900A1DECC /* Coordinate.swift */; };
+		0C3F36F52FD8B7A900A1DECC /* WeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36F42FD8B7A900A1DECC /* WeatherEntity.swift */; };
+		0C3F36F72FD8B98300A1DECC /* WeatherMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36F62FD8B98300A1DECC /* WeatherMapper.swift */; };
+		0C3F36FC2FD8BBF300A1DECC /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36FB2FD8BBF300A1DECC /* String+URL.swift */; };
+		0C3F36FF2FD8CAAC00A1DECC /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36FE2FD8CAAC00A1DECC /* WeatherRepository.swift */; };
+		0C3F370A2FD8D05600A1DECC /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */; };
+		0C3F370C2FD8E8AD00A1DECC /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */; };
 		0CF9EF212FD77CB500FB2C6D /* SkyGlassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9EF202FD77CB500FB2C6D /* SkyGlassApp.swift */; };
-		0CF9EF232FD77CB500FB2C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9EF222FD77CB500FB2C6D /* ContentView.swift */; };
-		0CF9EF252FD77CB500FB2C6D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9EF242FD77CB500FB2C6D /* Item.swift */; };
 		0CF9EF272FD77CB600FB2C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF9EF262FD77CB600FB2C6D /* Assets.xcassets */; };
 		0CF9EF2A2FD77CB600FB2C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF9EF292FD77CB600FB2C6D /* Preview Assets.xcassets */; };
 		0CF9EF342FD77CB700FB2C6D /* SkyGlassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9EF332FD77CB700FB2C6D /* SkyGlassTests.swift */; };
@@ -22,10 +28,19 @@
 		0CFCABAC2FD85C340031F73C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCAB9E2FD85C340031F73C /* SearchView.swift */; };
 		0CFCABAD2FD85C340031F73C /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABA12FD85C340031F73C /* FavoriteViewModel.swift */; };
 		0CFCABAE2FD85C340031F73C /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABA32FD85C340031F73C /* FavoriteView.swift */; };
-		0CFCABAF2FD85C340031F73C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABA62FD85C340031F73C /* HomeViewModel.swift */; };
+		0CFCABAF2FD85C340031F73C /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABA62FD85C340031F73C /* WeatherViewModel.swift */; };
 		0CFCABB02FD85C340031F73C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABA82FD85C340031F73C /* HomeView.swift */; };
 		0CFCABB22FD85DF60031F73C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABB12FD85DF60031F73C /* SplashView.swift */; };
 		0CFCABB42FD8621D0031F73C /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABB32FD8621D0031F73C /* AppContainer.swift */; };
+		0CFCABB62FD8682C0031F73C /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABB52FD8682C0031F73C /* ApiError.swift */; };
+		0CFCABB82FD868480031F73C /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABB72FD868480031F73C /* ApiConstants.swift */; };
+		0CFCABBA2FD8685E0031F73C /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABB92FD8685E0031F73C /* ApiClient.swift */; };
+		0CFCABBF2FD876860031F73C /* SkyGlass-Local.xcconfig.example in Resources */ = {isa = PBXBuildFile; fileRef = 0CFCABBC2FD876860031F73C /* SkyGlass-Local.xcconfig.example */; };
+		0CFCABC02FD876860031F73C /* SkyGlass.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0CFCABBD2FD876860031F73C /* SkyGlass.xcconfig */; };
+		0CFCABC32FD88CF30031F73C /* ApiKeyInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABC22FD88CF30031F73C /* ApiKeyInterceptor.swift */; };
+		0CFCABC72FD894250031F73C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0CFCABC62FD894250031F73C /* Alamofire */; };
+		0CFCABCB2FD8976C0031F73C /* ApiEndpint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABCA2FD8976C0031F73C /* ApiEndpint.swift */; };
+		0CFCABCF2FD898D00031F73C /* WeatherServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCABCE2FD898D00031F73C /* WeatherServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,10 +61,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C3F36F02FD8B00800A1DECC /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		0C3F36F22FD8B4C900A1DECC /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		0C3F36F42FD8B7A900A1DECC /* WeatherEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEntity.swift; sourceTree = "<group>"; };
+		0C3F36F62FD8B98300A1DECC /* WeatherMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapper.swift; sourceTree = "<group>"; };
+		0C3F36FB2FD8BBF300A1DECC /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
+		0C3F36FE2FD8CAAC00A1DECC /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
+		0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUseCase.swift; sourceTree = "<group>"; };
+		0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		0C3F370D2FD8F52A00A1DECC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0CF9EF1D2FD77CB500FB2C6D /* SkyGlass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyGlass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF9EF202FD77CB500FB2C6D /* SkyGlassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyGlassApp.swift; sourceTree = "<group>"; };
-		0CF9EF222FD77CB500FB2C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0CF9EF242FD77CB500FB2C6D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		0CF9EF262FD77CB600FB2C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CF9EF292FD77CB600FB2C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0CF9EF2F2FD77CB700FB2C6D /* SkyGlassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyGlassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,10 +86,19 @@
 		0CFCAB9E2FD85C340031F73C /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0CFCABA12FD85C340031F73C /* FavoriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		0CFCABA32FD85C340031F73C /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
-		0CFCABA62FD85C340031F73C /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0CFCABA62FD85C340031F73C /* WeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		0CFCABA82FD85C340031F73C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0CFCABB12FD85DF60031F73C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		0CFCABB32FD8621D0031F73C /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		0CFCABB52FD8682C0031F73C /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		0CFCABB72FD868480031F73C /* ApiConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
+		0CFCABB92FD8685E0031F73C /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		0CFCABBC2FD876860031F73C /* SkyGlass-Local.xcconfig.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SkyGlass-Local.xcconfig.example"; sourceTree = "<group>"; };
+		0CFCABBD2FD876860031F73C /* SkyGlass.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SkyGlass.xcconfig; sourceTree = "<group>"; };
+		0CFCABC12FD878D50031F73C /* SkyGlass-Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "SkyGlass-Local.xcconfig"; sourceTree = "<group>"; };
+		0CFCABC22FD88CF30031F73C /* ApiKeyInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyInterceptor.swift; sourceTree = "<group>"; };
+		0CFCABCA2FD8976C0031F73C /* ApiEndpint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndpint.swift; sourceTree = "<group>"; };
+		0CFCABCE2FD898D00031F73C /* WeatherServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CFCABC72FD894250031F73C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +127,96 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C3F36F82FD8BB1600A1DECC /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		0C3F37002FD8CF7600A1DECC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F37052FD8CFDF00A1DECC /* Repos */,
+				0C3F37042FD8CFC600A1DECC /* Services */,
+				0C3F37032FD8CFAD00A1DECC /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0C3F37012FD8CF8000A1DECC /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F37082FD8D03600A1DECC /* UseCases */,
+				0C3F37072FD8D01700A1DECC /* Mapper */,
+				0C3F37062FD8D00200A1DECC /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0C3F37022FD8CF8600A1DECC /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCABA92FD85C340031F73C /* Views */,
+				0CFCABA72FD85C340031F73C /* ViewModels */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0C3F37032FD8CFAD00A1DECC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F36F02FD8B00800A1DECC /* WeatherResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0C3F37042FD8CFC600A1DECC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCABCE2FD898D00031F73C /* WeatherServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0C3F37052FD8CFDF00A1DECC /* Repos */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F36FE2FD8CAAC00A1DECC /* WeatherRepository.swift */,
+			);
+			path = Repos;
+			sourceTree = "<group>";
+		};
+		0C3F37062FD8D00200A1DECC /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F36F22FD8B4C900A1DECC /* Coordinate.swift */,
+				0C3F36F42FD8B7A900A1DECC /* WeatherEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		0C3F37072FD8D01700A1DECC /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F36F62FD8B98300A1DECC /* WeatherMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
+		0C3F37082FD8D03600A1DECC /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		0CF9EF142FD77CB500FB2C6D = {
 			isa = PBXGroup;
 			children = (
+				0CFCABBE2FD876860031F73C /* Config */,
 				0CF9EF1F2FD77CB500FB2C6D /* SkyGlass */,
 				0CF9EF322FD77CB700FB2C6D /* SkyGlassTests */,
 				0CF9EF3C2FD77CB700FB2C6D /* SkyGlassUITests */,
@@ -118,12 +237,12 @@
 		0CF9EF1F2FD77CB500FB2C6D /* SkyGlass */ = {
 			isa = PBXGroup;
 			children = (
+				0C3F370D2FD8F52A00A1DECC /* Info.plist */,
+				0C3F36F82FD8BB1600A1DECC /* Theme */,
 				0CF9EF4F2FD7832600FB2C6D /* Views */,
 				0CF9EF4E2FD782D600FB2C6D /* Core */,
 				0CF9EF4D2FD782CE00FB2C6D /* Modules */,
 				0CF9EF4C2FD782C500FB2C6D /* App */,
-				0CF9EF222FD77CB500FB2C6D /* ContentView.swift */,
-				0CF9EF242FD77CB500FB2C6D /* Item.swift */,
 				0CF9EF262FD77CB600FB2C6D /* Assets.xcassets */,
 				0CF9EF282FD77CB600FB2C6D /* Preview Content */,
 			);
@@ -170,7 +289,7 @@
 			children = (
 				0CFCABA52FD85C340031F73C /* Favorite */,
 				0CFCABA02FD85C340031F73C /* Search */,
-				0CFCABAA2FD85C340031F73C /* Home */,
+				0CFCABAA2FD85C340031F73C /* Weather */,
 				0CF9EF572FD78DD400FB2C6D /* Splash */,
 			);
 			path = Modules;
@@ -185,7 +304,6 @@
 				0CF9EF532FD783E400FB2C6D /* Network */,
 				0CF9EF522FD783DC00FB2C6D /* Routing */,
 				0CF9EF512FD783CA00FB2C6D /* DI */,
-				0CF9EF502FD7832E00FB2C6D /* Services */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -195,13 +313,6 @@
 			children = (
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0CF9EF502FD7832E00FB2C6D /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		0CF9EF512FD783CA00FB2C6D /* DI */ = {
@@ -223,6 +334,11 @@
 		0CF9EF532FD783E400FB2C6D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				0CFCABB52FD8682C0031F73C /* ApiError.swift */,
+				0CFCABB72FD868480031F73C /* ApiConstants.swift */,
+				0CFCABB92FD8685E0031F73C /* ApiClient.swift */,
+				0CFCABC22FD88CF30031F73C /* ApiKeyInterceptor.swift */,
+				0CFCABCA2FD8976C0031F73C /* ApiEndpint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -230,6 +346,7 @@
 		0CF9EF542FD7840100FB2C6D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C3F36FB2FD8BBF300A1DECC /* String+URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,7 +434,7 @@
 		0CFCABA72FD85C340031F73C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				0CFCABA62FD85C340031F73C /* HomeViewModel.swift */,
+				0CFCABA62FD85C340031F73C /* WeatherViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -330,13 +447,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0CFCABAA2FD85C340031F73C /* Home */ = {
+		0CFCABAA2FD85C340031F73C /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				0CFCABA72FD85C340031F73C /* ViewModels */,
-				0CFCABA92FD85C340031F73C /* Views */,
+				0C3F37022FD8CF8600A1DECC /* Presentation */,
+				0C3F37012FD8CF8000A1DECC /* Domain */,
+				0C3F37002FD8CF7600A1DECC /* Data */,
 			);
-			path = Home;
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		0CFCABBE2FD876860031F73C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCABBC2FD876860031F73C /* SkyGlass-Local.xcconfig.example */,
+				0CFCABBD2FD876860031F73C /* SkyGlass.xcconfig */,
+				0CFCABC12FD878D50031F73C /* SkyGlass-Local.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +483,9 @@
 			dependencies = (
 			);
 			name = SkyGlass;
+			packageProductDependencies = (
+				0CFCABC62FD894250031F73C /* Alamofire */,
+			);
 			productName = SkyGlass;
 			productReference = 0CF9EF1D2FD77CB500FB2C6D /* SkyGlass.app */;
 			productType = "com.apple.product-type.application";
@@ -427,6 +558,9 @@
 				Base,
 			);
 			mainGroup = 0CF9EF142FD77CB500FB2C6D;
+			packageReferences = (
+				0CFCABC52FD894250031F73C /* XCRemoteSwiftPackageReference "alamofire" */,
+			);
 			productRefGroup = 0CF9EF1E2FD77CB500FB2C6D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -444,6 +578,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CF9EF2A2FD77CB600FB2C6D /* Preview Assets.xcassets in Resources */,
+				0CFCABC02FD876860031F73C /* SkyGlass.xcconfig in Resources */,
+				0CFCABBF2FD876860031F73C /* SkyGlass-Local.xcconfig.example in Resources */,
 				0CF9EF272FD77CB600FB2C6D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,17 +605,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3F36FF2FD8CAAC00A1DECC /* WeatherRepository.swift in Sources */,
+				0CFCABCB2FD8976C0031F73C /* ApiEndpint.swift in Sources */,
 				0CFCABAD2FD85C340031F73C /* FavoriteViewModel.swift in Sources */,
-				0CFCABAF2FD85C340031F73C /* HomeViewModel.swift in Sources */,
+				0C3F370C2FD8E8AD00A1DECC /* AppTheme.swift in Sources */,
+				0C3F36FC2FD8BBF300A1DECC /* String+URL.swift in Sources */,
+				0CFCABAF2FD85C340031F73C /* WeatherViewModel.swift in Sources */,
+				0C3F36F12FD8B00800A1DECC /* WeatherResponse.swift in Sources */,
+				0C3F36F32FD8B4C900A1DECC /* Coordinate.swift in Sources */,
+				0CFCABC32FD88CF30031F73C /* ApiKeyInterceptor.swift in Sources */,
+				0C3F370A2FD8D05600A1DECC /* WeatherUseCase.swift in Sources */,
 				0CFCAB992FD852700031F73C /* RootViewModel.swift in Sources */,
 				0CFCABAB2FD85C340031F73C /* SearchViewModel.swift in Sources */,
+				0CFCABBA2FD8685E0031F73C /* ApiClient.swift in Sources */,
+				0CFCABB82FD868480031F73C /* ApiConstants.swift in Sources */,
 				0CF9EF5A2FD7A7CC00FB2C6D /* AppRouter.swift in Sources */,
+				0C3F36F72FD8B98300A1DECC /* WeatherMapper.swift in Sources */,
 				0CFCAB9B2FD8542A0031F73C /* RootView.swift in Sources */,
 				0CFCABAC2FD85C340031F73C /* SearchView.swift in Sources */,
 				0CFCABB22FD85DF60031F73C /* SplashView.swift in Sources */,
-				0CF9EF232FD77CB500FB2C6D /* ContentView.swift in Sources */,
-				0CF9EF252FD77CB500FB2C6D /* Item.swift in Sources */,
+				0CFCABB62FD8682C0031F73C /* ApiError.swift in Sources */,
 				0CFCABB02FD85C340031F73C /* HomeView.swift in Sources */,
+				0C3F36F52FD8B7A900A1DECC /* WeatherEntity.swift in Sources */,
+				0CFCABCF2FD898D00031F73C /* WeatherServices.swift in Sources */,
 				0CFCABAE2FD85C340031F73C /* FavoriteView.swift in Sources */,
 				0CF9EF212FD77CB500FB2C6D /* SkyGlassApp.swift in Sources */,
 				0CFCABB42FD8621D0031F73C /* AppContainer.swift in Sources */,
@@ -521,6 +669,7 @@
 /* Begin XCBuildConfiguration section */
 		0CF9EF412FD77CB700FB2C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CFCABC12FD878D50031F73C /* SkyGlass-Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -584,6 +733,7 @@
 		};
 		0CF9EF422FD77CB700FB2C6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CFCABC12FD878D50031F73C /* SkyGlass-Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -640,6 +790,7 @@
 		};
 		0CF9EF442FD77CB700FB2C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CFCABBD2FD876860031F73C /* SkyGlass.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -648,6 +799,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SkyGlass/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkyGlass/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -668,6 +820,7 @@
 		};
 		0CF9EF452FD77CB700FB2C6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CFCABBD2FD876860031F73C /* SkyGlass.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -676,6 +829,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SkyGlass/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkyGlass/Info.plist;
+				INFOPLIST_KEY_API_KEY = "$(API_KEY)";
+				INFOPLIST_KEY_BASE_URL = "$(BASE_URL)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -806,6 +962,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0CFCABC52FD894250031F73C /* XCRemoteSwiftPackageReference "alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alamofire/alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CFCABC62FD894250031F73C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CFCABC52FD894250031F73C /* XCRemoteSwiftPackageReference "alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0CF9EF152FD77CB500FB2C6D /* Project object */;
 }

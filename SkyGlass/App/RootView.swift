@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
+    let container: AppContainer
     @StateObject private var viewModel = RootViewModel()
     @StateObject private var appRouter = AppRouter()
     
@@ -17,7 +18,7 @@ struct RootView: View {
             case .splash:
                 SplashView()
             case .ready:
-                MainContentView()
+                MainContentView(container: container)
                     .environmentObject(appRouter)
             }
         }
@@ -27,15 +28,16 @@ struct RootView: View {
     }
 }
     struct MainContentView: View {
+        let container: AppContainer
         @EnvironmentObject var appRouter: AppRouter
         
         var body: some View {
             NavigationStack(path: $appRouter.path) {
-                HomeView()
+                HomeView(viewModel: container.makeWeatherViewModel())
                     .navigationDestination(for: Route.self) { route in
                         switch route {
                         case .home:
-                            HomeView()
+                            HomeView(viewModel: container.makeWeatherViewModel())
                         case .search:
                             SearchView()
                         case .favorites:
