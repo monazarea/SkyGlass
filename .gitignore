@@ -1,0 +1,16 @@
+# Xcode
+.DS_Store
+xcuserdata/
+
+# Build artifacts
+build/
+DerivedData/
+
+# Local configuration files (SENSITIVE DATA)
+Config/SkyGlass-Local.xcconfig
+Config/*-Local.xcconfig
+*.local.xcconfig
+
+# CocoaPods
+Pods/
+Podfile.lock
