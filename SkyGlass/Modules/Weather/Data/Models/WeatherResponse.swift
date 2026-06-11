@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct WeatherResponse: Decodable {
     let location: Location
     let current: CurrentWeather
@@ -14,24 +15,25 @@ struct WeatherResponse: Decodable {
 
 struct Location: Decodable {
     let name: String
-    let region: String
-    let country: String
+    let region: String?
+    let country: String?
     let lat: Double
     let lon: Double
-    let localtime: String
+    let localtime: String?
 }
 
 struct CurrentWeather: Decodable {
     let tempC: Double
     let isDay: Int
     let condition: WeatherCondition
-    let windKph: Double
-    let windDirection: String
-    let humidity: Int
-    let feelslikeC: Double
-    let visKm: Double
-    let pressureMb: Double
-    let cloud: Int
+    
+    let windKph: Double?
+    let windDirection: String?
+    let humidity: Int?
+    let feelslikeC: Double?
+    let visKm: Double?
+    let pressureMb: Double?
+    let cloud: Int?
     
     enum CodingKeys: String, CodingKey {
         case tempC = "temp_c"
@@ -67,8 +69,9 @@ struct DailyForecast: Decodable {
     let maxtempC: Double
     let mintempC: Double
     let avgtempC: Double
-    let dailyChanceOfRain: Int
     let condition: WeatherCondition
+    
+    let dailyChanceOfRain: Int?
     
     enum CodingKeys: String, CodingKey {
         case maxtempC = "maxtemp_c"
@@ -82,13 +85,22 @@ struct DailyForecast: Decodable {
 struct HourlyForecast: Decodable {
     let time: String
     let tempC: Double
+    let feelslikeC: Double      
+    let humidity: Int
+    let windKph: Double
+    let pressureMb: Double
     let condition: WeatherCondition
-    let chanceOfRain: Int
+    
+    let chanceOfRain: Int?
     
     enum CodingKeys: String, CodingKey {
         case time
         case tempC = "temp_c"
         case condition
         case chanceOfRain = "chance_of_rain"
+        case feelslikeC  = "feelslike_c"
+        case humidity
+        case windKph     = "wind_kph"
+        case pressureMb  = "pressure_mb"
     }
 }

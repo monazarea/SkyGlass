@@ -10,6 +10,7 @@ enum Route : Hashable{
     case home
     case search
     case favorites
+    case fullForecast(days: [DayEntity], theme: AppTheme)
     
 }
 
