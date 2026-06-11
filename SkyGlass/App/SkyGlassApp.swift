@@ -10,10 +10,14 @@ import SwiftData
 
 @main
 struct SkyGlassApp: App {
-    let appContainer = AppContainer()
+    let appContainer: AppContainer
+    @MainActor
+        init() {
+            self.appContainer = AppContainer()
+        }
     var body: some Scene {
         WindowGroup {
             RootView(container: appContainer)
-        }
+        }.modelContainer(appContainer.modelContainer)
     }
 }

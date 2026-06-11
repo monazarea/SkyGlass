@@ -9,10 +9,11 @@ import SwiftUI
 
 struct HeaderView: View {
     let cityName: String
+    @EnvironmentObject var appRouter: AppRouter
     let theme : AppTheme
     var body: some View {
         HStack {
-            Button(action: { /* Menu Action */ }) {
+            Button(action: { appRouter.navigate(to: .favorites)}) {
                 Image(systemName: "line.3.horizontal")
                     .font(.title2)
             }
@@ -25,7 +26,7 @@ struct HeaderView: View {
             
             Spacer()
             
-            Button(action: { /* Search Action */ }) {
+            Button(action: {appRouter.navigate(to: .search) }) {
                 Image(systemName: "magnifyingglass")
                     .font(.title2)
             }

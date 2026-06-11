@@ -93,3 +93,11 @@ extension WeatherEntity {
         forecast: DayEntity.mockArray 
     )
 }
+
+extension SearchLocationEntity {
+    static let mockCairo = SearchLocationEntity(id: 1, name: "Cairo", region: "Al Qahirah", country: "Egypt", coordinate: Coordinate(lat: 30.05, lon: 31.25))
+    static let mockAlex = SearchLocationEntity(id: 2, name: "Alexandria", region: "Al Iskandariyah", country: "Egypt", coordinate: Coordinate(lat: 31.2, lon: 29.91))
+    static let mockLondon = SearchLocationEntity(id: 3, name: "London", region: "City of London", country: "United Kingdom", coordinate: Coordinate(lat: 51.52, lon: -0.11))
+    
+    static let mockArray = [mockCairo, mockAlex, mockLondon]
+}

@@ -9,15 +9,17 @@ final class WeatherViewModel: ObservableObject {
     @Published var weather : WeatherEntity? = nil
     @Published var isSaved : Bool = false
     @Published var currentTheme: AppTheme = .sunny
-    
+    @Published var isFavorite: Bool = false
     private var cancellables = Set<AnyCancellable>()
 
     private let weatherUseCase : WeatherUseCaseProtocol
     private var currentCoordinates : Coordinate?
     private var locationService : LocationServiceProtocol
-    init(weatherUseCase :WeatherUseCaseProtocol, locationService: LocationServiceProtocol){
+    private let favoritesRepository: FavoritesRepositoryProtocol
+    init(weatherUseCase :WeatherUseCaseProtocol, locationService: LocationServiceProtocol,favoritesRepository: FavoritesRepositoryProtocol){
         self.weatherUseCase = weatherUseCase
         self.locationService = locationService
+        self.favoritesRepository = favoritesRepository
         setupLocationListener()
     }
     private func setupLocationListener() {
@@ -45,6 +47,7 @@ final class WeatherViewModel: ObservableObject {
                 let fetchedWeather = try await weatherUseCase.execute(coordinate: coordinate)
                 self.weather = fetchedWeather
                 self.currentTheme = AppTheme.getTheme(conditionCode: fetchedWeather.conditionCode, isDay: fetchedWeather.isDay)
+                self.isFavorite = try favoritesRepository.isFavorite(id: Int(fetchedWeather.id))
                 self.isLoading = false
             }catch{
                 self.errorMessage = error.localizedDescription
@@ -60,8 +63,28 @@ final class WeatherViewModel: ObservableObject {
         }
     }
     
-    func saveCurrentLocation(){
-        isSaved.toggle()
-        // TODO: Implement saving logic, e.g., save to UserDefaults or a database
-    }
+    func toggleFavorite() {
+            guard let weather else { return }
+            
+            do {
+                if isFavorite {
+                    try favoritesRepository.removeFavorite(id: Int(weather.id))
+                } else {
+                    let newFavorite = FavoriteLocation(
+                        id: Int(weather.id),
+                        cityName: weather.cityName,
+                        region: weather.region,
+                        country: weather.country,
+                        latitude: weather.coordinate.lat,
+                        longitude: weather.coordinate.lon
+                    )
+                    try favoritesRepository.addFavorite(newFavorite)
+                }
+                
+                isFavorite.toggle()
+                
+            } catch {
+                self.errorMessage = "Failed to update favorites: \(error.localizedDescription)"
+            }
+        }
 }
