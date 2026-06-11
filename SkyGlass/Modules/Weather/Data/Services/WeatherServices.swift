@@ -25,7 +25,7 @@ final class WeatherServices: WeatherServicesProtocol {
     
     func fetchForecast(for coordinate: Coordinate) async throws ->
     WeatherResponse{
-        return try await apiClient.request(endpoint: .forecast(location: coordinate.queryString, days: 7), responseType: WeatherResponse.self)
+        return try await apiClient.request(endpoint: .forecast(location: coordinate.queryString, days: 10), responseType: WeatherResponse.self)
     }
 }
 

@@ -33,16 +33,20 @@ struct RootView: View {
         
         var body: some View {
             NavigationStack(path: $appRouter.path) {
-                HomeView(viewModel: container.makeWeatherViewModel())
+                WeatherView(viewModel: container.makeWeatherViewModel())
                     .navigationDestination(for: Route.self) { route in
                         switch route {
                         case .home:
-                            HomeView(viewModel: container.makeWeatherViewModel())
+                            WeatherView(viewModel: container.makeWeatherViewModel())
                         case .search:
                             SearchView()
                         case .favorites:
                             FavoriteView()
+                        case .fullForecast(let days, let theme):
+                            FullDailyForecastView(days: days, theme: theme)
+                                            
                         }
+                        
                     }
             }
         }

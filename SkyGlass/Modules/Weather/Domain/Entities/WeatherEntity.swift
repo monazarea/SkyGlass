@@ -24,7 +24,7 @@ struct WeatherEntity {
     let forecast: [DayEntity]
 }
 
-struct DayEntity {
+struct DayEntity :Hashable{
     let date: String
     let maxTempC: Double
     let minTempC: Double
@@ -34,9 +34,13 @@ struct DayEntity {
     let hours: [HourEntity]
 }
 
-struct HourEntity {
+struct HourEntity :Hashable {
     let time: String
     let tempC: Double
+    let feelsLikeC: Double
+    let humidity: Int
+    let windKph: Double
+    let pressureMb: Double    
     let conditionText: String
     let conditionIconUrl: String
     let conditionCode: Int
