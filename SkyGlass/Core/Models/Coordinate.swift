@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Coordinate {
+struct Coordinate: Hashable {
     let lat: Double
     let lon: Double
 
