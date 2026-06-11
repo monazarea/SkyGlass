@@ -9,8 +9,7 @@ import Foundation
 
 protocol WeatherServicesProtocol {
     func fetchForecast(for coordinate : Coordinate) async throws -> WeatherResponse
-  //  func searchCity(query : String) async throws -> SearchResponse
-
+    func searchCity(query: String) async throws -> [SearchLocationResponse]
 
 }
 
@@ -27,6 +26,11 @@ final class WeatherServices: WeatherServicesProtocol {
     WeatherResponse{
         return try await apiClient.request(endpoint: .forecast(location: coordinate.queryString, days: 10), responseType: WeatherResponse.self)
     }
+    
+    func searchCity(query: String) async throws -> [SearchLocationResponse] {
+            return try await apiClient.request(endpoint: .search(query: query), responseType: [SearchLocationResponse].self)
+        }
+    
 }
 
 

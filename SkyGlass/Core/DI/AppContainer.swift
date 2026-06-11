@@ -6,10 +6,25 @@
 //
 
 import Foundation
+import SwiftData
+
+@MainActor
 final class AppContainer {
     
         
-    init() {}
+    let modelContainer: ModelContainer
+        
+        init() {
+            do {
+                modelContainer = try ModelContainer(for: FavoriteLocation.self)
+            } catch {
+                fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
+            }
+        }
+    
+    var modelContext: ModelContext {
+            modelContainer.mainContext
+        }
     
     private lazy var weatherService: WeatherServicesProtocol = {
             return WeatherServices(apiClient: ApiClient.shared)
@@ -22,13 +37,34 @@ final class AppContainer {
     private lazy var weatherRepository: WeatherRepositoryProtocol = {
             return WeatherRepository(networkService: weatherService)
     }()
-        
+    
+    private lazy var locationRepository: LocationRepositoryProtocol = {
+        return LocationRepository(weatherService: weatherService)
+    }()
+       
+    private lazy var favoritesRepository: FavoritesRepositoryProtocol = {
+        return FavoritesRepository(context: modelContext)
+    }()
+      
+    func makeSearchUseCase() -> SearchLocationsUseCase {
+        return SearchLocationsUseCase(repository: locationRepository)
+    }
     func makeWeatherUseCase() -> WeatherUseCaseProtocol {
         return WeatherUseCase(repository: weatherRepository)
     }
+    
     @MainActor func makeWeatherViewModel() -> WeatherViewModel {
-        return WeatherViewModel(weatherUseCase: makeWeatherUseCase(),locationService: locationService)
+        return WeatherViewModel(weatherUseCase: makeWeatherUseCase(),locationService: locationService,favoritesRepository: favoritesRepository)
     }
+    
+    @MainActor func makeSearchViewModel() -> SearchViewModel {
+            return SearchViewModel(searchUseCase: makeSearchUseCase(),locationService: locationService)
+        }
+    @MainActor func makeFavoritesViewModel() -> FavoritesViewModel {
+        return FavoritesViewModel(favoritesRepository: favoritesRepository, locationService: locationService)
+        }
+    
+    
     
 }
 

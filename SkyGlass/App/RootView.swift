@@ -39,16 +39,16 @@ struct RootView: View {
                         case .home:
                             WeatherView(viewModel: container.makeWeatherViewModel())
                         case .search:
-                            SearchView()
+                            SearchView(viewModel: container.makeSearchViewModel())
                         case .favorites:
-                            FavoriteView()
+                            FavoriteView(viewModel: container.makeFavoritesViewModel())
                         case .fullForecast(let days, let theme):
                             FullDailyForecastView(days: days, theme: theme)
                                             
                         }
                         
                     }
-            }
+            }.environment(\.appTheme, container.makeWeatherViewModel().currentTheme)
         }
     }
 

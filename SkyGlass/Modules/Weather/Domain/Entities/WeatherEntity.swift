@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct WeatherEntity {
+struct WeatherEntity : Hashable, Identifiable {
     let id: Int
     let cityName: String
     let region: String
