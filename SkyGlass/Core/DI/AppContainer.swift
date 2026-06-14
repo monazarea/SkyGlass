@@ -11,29 +11,33 @@ import SwiftData
 @MainActor
 final class AppContainer {
     
-        
+    
     let modelContainer: ModelContainer
-        
-        init() {
-            do {
-                modelContainer = try ModelContainer(for: FavoriteLocation.self)
-            } catch {
-                fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
-            }
+    
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: FavoriteLocation.self)
+        } catch {
+            fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }
+    }
     
     var modelContext: ModelContext {
-            modelContainer.mainContext
-        }
+        modelContainer.mainContext
+    }
     
     private lazy var weatherService: WeatherServicesProtocol = {
-            return WeatherServices(apiClient: ApiClient.shared)
-    }()
-        
-    private lazy var locationService: LocationServiceProtocol = {
-            return LocationService()
+        return WeatherServices(apiClient: ApiClient.shared)
     }()
     
+    private lazy var locationService: LocationServiceProtocol = {
+        return LocationService()
+    }()
+    
+    private lazy var favoriteService: FavoritesLocalServiceProtocol = {
+        return FavoritesLocalService(context: modelContext)
+    }()
+
     private lazy var weatherRepository: WeatherRepositoryProtocol = {
             return WeatherRepository(networkService: weatherService)
     }()
@@ -43,7 +47,7 @@ final class AppContainer {
     }()
        
     private lazy var favoritesRepository: FavoritesRepositoryProtocol = {
-        return FavoritesRepository(context: modelContext)
+        return FavoritesRepository(localService: favoriteService)
     }()
       
     func makeSearchUseCase() -> SearchLocationsUseCase {
@@ -52,9 +56,12 @@ final class AppContainer {
     func makeWeatherUseCase() -> WeatherUseCaseProtocol {
         return WeatherUseCase(repository: weatherRepository)
     }
+    func makeLocationUseCase() -> LocationUseCaseProtocol {
+        return LocationUseCase(locationService: locationService)
+    }
     
     @MainActor func makeWeatherViewModel() -> WeatherViewModel {
-        return WeatherViewModel(weatherUseCase: makeWeatherUseCase(),locationService: locationService,favoritesRepository: favoritesRepository)
+        return WeatherViewModel(weatherUseCase: makeWeatherUseCase(),locationUseCase: makeLocationUseCase(),favoritesRepository: favoritesRepository)
     }
     
     @MainActor func makeSearchViewModel() -> SearchViewModel {

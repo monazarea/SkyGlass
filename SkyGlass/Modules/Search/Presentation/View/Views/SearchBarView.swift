@@ -3,21 +3,21 @@ import SwiftUI
 
 struct SearchBarView: View {
     @Binding var text: String
-    let theme: AppTheme
+    @EnvironmentObject private var themeManager: ThemeManager
     var onClear: () -> Void
 
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(theme.primaryTextColor.opacity(0.6))
+                .foregroundColor( themeManager.currentTheme.primaryTextColor.opacity(0.6))
                 .font(.system(size: 16, weight: .medium))
 
             TextField("", text: $text)
                 .placeholder(when: text.isEmpty) {
                     Text("Search city or location...")
-                        .foregroundColor(theme.primaryTextColor.opacity(0.4))
+                        .foregroundColor( themeManager.currentTheme.primaryTextColor.opacity(0.4))
                 }
-                .foregroundColor(theme.primaryTextColor)
+                .foregroundColor( themeManager.currentTheme.primaryTextColor)
                 .font(.body)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
@@ -27,7 +27,7 @@ struct SearchBarView: View {
                     onClear()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(theme.primaryTextColor.opacity(0.5))
+                        .foregroundColor( themeManager.currentTheme.primaryTextColor.opacity(0.5))
                         .font(.system(size: 16))
                 }
                 .transition(.opacity.combined(with: .scale))
@@ -35,7 +35,7 @@ struct SearchBarView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
-        .glassStyle(cornerRadius: 16, theme: theme, opacity: 0.5)
+        .glassStyle(cornerRadius: 16,  opacity: 0.5)
         .animation(.easeInOut(duration: 0.2), value: text.isEmpty)
     }
 }

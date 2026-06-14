@@ -9,16 +9,16 @@ import SwiftUI
 
 struct FullDailyForecastView: View {
     let days: [DayEntity]
-    let theme: AppTheme
-    
+    @EnvironmentObject private var themeManager: ThemeManager
+
     var body: some View {
         ZStack {
-            Image(theme.backgroundImageName)
+            Image(themeManager.currentTheme.backgroundImageName)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            theme.backgroundOverlay
+            themeManager.currentTheme.backgroundOverlay
                 .ignoresSafeArea()
             
             ScrollView(showsIndicators: false) {
@@ -31,22 +31,22 @@ struct FullDailyForecastView: View {
                             .fontWeight(.bold)
                             .tracking(1.5)
                     }
-                    .foregroundColor(theme.primaryTextColor)
+                    .foregroundColor(themeManager.currentTheme.primaryTextColor)
                     .padding(.bottom, 4)
                     
                     VStack(spacing: 16) {
                         ForEach(days, id: \.date) { day in
-                            DailyRowView(day: day, theme: theme)
+                            DailyRowView(day: day)
                             
                             if day.date != days.last?.date {
                                 Divider()
-                                    .background(theme.primaryTextColor.opacity(0.2))
+                                    .background(themeManager.currentTheme.primaryTextColor.opacity(0.2))
                             }
                         }
                     }
                 }
                 .padding(20)
-                .glassStyle(cornerRadius: 24, theme: theme, opacity: 0.6)
+                .glassStyle(cornerRadius: 24, opacity: 0.6)
                 .padding()
             }
         }
@@ -55,12 +55,12 @@ struct FullDailyForecastView: View {
         
         .toolbarBackground(.hidden, for: .navigationBar)
         
-        .toolbarColorScheme(theme.primaryTextColor == .white ? .dark : .light, for: .navigationBar)
+        .toolbarColorScheme(themeManager.currentTheme.primaryTextColor == .white ? .dark : .light, for: .navigationBar)
     }
 }
 
 #Preview {
     NavigationView {
-        FullDailyForecastView(days: DayEntity.mockArray, theme: .clearNight)
+        FullDailyForecastView(days: DayEntity.mockArray)
     }
 }

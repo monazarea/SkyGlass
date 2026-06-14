@@ -6,8 +6,8 @@ import SwiftUI
 struct WeatherMetricsGrid: View {
     let weather: WeatherEntity
     let hourlyForecast: [HourEntity]
-    let theme: AppTheme
-    
+    @EnvironmentObject private var themeManager: ThemeManager
+
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -21,7 +21,7 @@ struct WeatherMetricsGrid: View {
                 title: "HUMIDITY",
                 value: "\(weather.humidity)%",
                 subtext: humiditySubtext(weather.humidity),
-                theme: theme,
+            
                 chartData: hourlyForecast.enumerated().map {
                     ChartDataPoint(index: $0.offset, value: Double($0.element.humidity))
                 },
@@ -33,7 +33,6 @@ struct WeatherMetricsGrid: View {
                 title: "WIND",
                 value: "\(Int(weather.windKph)) km/h",
                 subtext: "Wind speed right now.",
-                theme: theme,
                 chartData: hourlyForecast.enumerated().map {
                     ChartDataPoint(index: $0.offset, value: $0.element.windKph)
                 },
@@ -45,7 +44,6 @@ struct WeatherMetricsGrid: View {
                 title: "FEELS LIKE",
                 value: "\(Int(weather.feelsLikeC))°",
                 subtext: feelsLikeSubtext(actual: weather.tempC, feelsLike: weather.feelsLikeC),
-                theme: theme,
                 chartData: hourlyForecast.enumerated().map {
                     ChartDataPoint(index: $0.offset, value: $0.element.feelsLikeC)
                 },
@@ -57,7 +55,6 @@ struct WeatherMetricsGrid: View {
                 title: "PRESSURE",
                 value: "\(Int(weather.pressureMb)) hPa",
                 subtext: "Atmospheric pressure.",
-                theme: theme,
                 chartData: hourlyForecast.enumerated().map {
                     ChartDataPoint(index: $0.offset, value: $0.element.pressureMb)
                 },

@@ -36,6 +36,9 @@
 		0C3F36FF2FD8CAAC00A1DECC /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F36FE2FD8CAAC00A1DECC /* WeatherRepository.swift */; };
 		0C3F370A2FD8D05600A1DECC /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */; };
 		0C3F370C2FD8E8AD00A1DECC /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */; };
+		0C71EAFB2FDE0B67008674D8 /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C71EAFA2FDE0B67008674D8 /* LocationUseCase.swift */; };
+		0C71EAFD2FDE11C6008674D8 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C71EAFC2FDE11C6008674D8 /* ErrorAlertModifier.swift */; };
+		0C71EAFF2FDE40E5008674D8 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C71EAFE2FDE40E5008674D8 /* ThemeManager.swift */; };
 		0C862A932FDB099D00F6716E /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862A922FDB099D00F6716E /* SearchBarView.swift */; };
 		0C862A952FDB09D500F6716E /* SearchResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862A942FDB09D500F6716E /* SearchResultRow.swift */; };
 		0C862A972FDB119E00F6716E /* AppThemeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862A962FDB119E00F6716E /* AppThemeKey.swift */; };
@@ -45,6 +48,7 @@
 		0C862A9F2FDB34CA00F6716E /* FavoriteLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862A9E2FDB34CA00F6716E /* FavoriteLocation.swift */; };
 		0C862AC22FDB3A8A00F6716E /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862AC12FDB3A8A00F6716E /* FavoriteViewModel.swift */; };
 		0C862AC42FDB3A9E00F6716E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C862AC32FDB3A9E00F6716E /* FavoriteView.swift */; };
+		0CE9A2A22FDF0FCE0035E73E /* FavoritesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9A2A12FDF0FCE0035E73E /* FavoritesServices.swift */; };
 		0CF9EF212FD77CB500FB2C6D /* SkyGlassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9EF202FD77CB500FB2C6D /* SkyGlassApp.swift */; };
 		0CF9EF272FD77CB600FB2C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF9EF262FD77CB600FB2C6D /* Assets.xcassets */; };
 		0CF9EF2A2FD77CB600FB2C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF9EF292FD77CB600FB2C6D /* Preview Assets.xcassets */; };
@@ -119,6 +123,9 @@
 		0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUseCase.swift; sourceTree = "<group>"; };
 		0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		0C3F370D2FD8F52A00A1DECC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0C71EAFA2FDE0B67008674D8 /* LocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCase.swift; sourceTree = "<group>"; };
+		0C71EAFC2FDE11C6008674D8 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
+		0C71EAFE2FDE40E5008674D8 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		0C862A922FDB099D00F6716E /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		0C862A942FDB09D500F6716E /* SearchResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRow.swift; sourceTree = "<group>"; };
 		0C862A962FDB119E00F6716E /* AppThemeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeKey.swift; sourceTree = "<group>"; };
@@ -128,6 +135,7 @@
 		0C862A9E2FDB34CA00F6716E /* FavoriteLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocation.swift; sourceTree = "<group>"; };
 		0C862AC12FDB3A8A00F6716E /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteViewModel.swift; path = SkyGlass/Modules/Favorite/FavoriteViewModel.swift; sourceTree = SOURCE_ROOT; };
 		0C862AC32FDB3A9E00F6716E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteView.swift; path = SkyGlass/Modules/Favorite/FavoriteView.swift; sourceTree = SOURCE_ROOT; };
+		0CE9A2A12FDF0FCE0035E73E /* FavoritesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesServices.swift; sourceTree = "<group>"; };
 		0CF9EF1D2FD77CB500FB2C6D /* SkyGlass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyGlass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF9EF202FD77CB500FB2C6D /* SkyGlassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyGlassApp.swift; sourceTree = "<group>"; };
 		0CF9EF262FD77CB600FB2C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -183,14 +191,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C29DE9F2FD9BD8D006675D9 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				0C29DEA02FD9BD9E006675D9 /* LocationError.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
 		0C29DEA22FD9DEB7006675D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +275,7 @@
 				0C862A962FDB119E00F6716E /* AppThemeKey.swift */,
 				0C3F370B2FD8E8AD00A1DECC /* AppTheme.swift */,
 				0C29DEA72FD9EF38006675D9 /* AppTheme+UI.swift */,
+				0C71EAFE2FDE40E5008674D8 /* ThemeManager.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -313,6 +314,8 @@
 			isa = PBXGroup;
 			children = (
 				0CFCABCE2FD898D00031F73C /* WeatherServices.swift */,
+				0C29DE9D2FD9BA11006675D9 /* LocationService.swift */,
+				0CE9A2A12FDF0FCE0035E73E /* FavoritesServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				0C3F37092FD8D05600A1DECC /* WeatherUseCase.swift */,
+				0C71EAFA2FDE0B67008674D8 /* LocationUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -430,7 +434,6 @@
 				0C3F37042FD8CFC600A1DECC /* Services */,
 				0C3F37032FD8CFAD00A1DECC /* Models */,
 				0C29DEBF2FDA463F006675D9 /* Repos */,
-				0C29DE9F2FD9BD8D006675D9 /* Location */,
 				0CF9EF552FD7840900FB2C6D /* Helpers */,
 				0CF9EF542FD7840100FB2C6D /* Extensions */,
 				0CF9EF532FD783E400FB2C6D /* Network */,
@@ -443,6 +446,7 @@
 		0CF9EF4F2FD7832600FB2C6D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0C71EAFC2FDE11C6008674D8 /* ErrorAlertModifier.swift */,
 				0C29DEB12FDA0C01006675D9 /* GlassCardModifier.swift */,
 			);
 			path = Views;
@@ -488,7 +492,7 @@
 		0CF9EF552FD7840900FB2C6D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0C29DE9D2FD9BA11006675D9 /* LocationService.swift */,
+				0C29DEA02FD9BD9E006675D9 /* LocationError.swift */,
 				0C29DEB72FDA1FE3006675D9 /* TemperatureColorHelper.swift */,
 				0C862A9C2FDB329F00F6716E /* PersistenceController.swift */,
 			);
@@ -773,6 +777,7 @@
 				0CFCABB22FD85DF60031F73C /* SplashView.swift in Sources */,
 				0C862A9D2FDB329F00F6716E /* PersistenceController.swift in Sources */,
 				0C29DEA42FD9DEC3006675D9 /* CurrentWeatherSection.swift in Sources */,
+				0C71EAFD2FDE11C6008674D8 /* ErrorAlertModifier.swift in Sources */,
 				0CFCABB62FD8682C0031F73C /* ApiError.swift in Sources */,
 				0C29DEB02FDA0B85006675D9 /* String+DateFormat.swift in Sources */,
 				0C29DECB2FDA4A90006675D9 /* SearchLocationMapper.swift in Sources */,
@@ -787,7 +792,10 @@
 				0C29DEAA2FDA02BC006675D9 /* AlertSection.swift in Sources */,
 				0C29DEA62FD9EDDD006675D9 /* HeaderView.swift in Sources */,
 				0C29DEBA2FDA23D9006675D9 /* MiniSparklineView.swift in Sources */,
+				0CE9A2A22FDF0FCE0035E73E /* FavoritesServices.swift in Sources */,
 				0C862A9B2FDB31C300F6716E /* FavoritesRepository.swift in Sources */,
+				0C71EAFB2FDE0B67008674D8 /* LocationUseCase.swift in Sources */,
+				0C71EAFF2FDE40E5008674D8 /* ThemeManager.swift in Sources */,
 				0CFCABCF2FD898D00031F73C /* WeatherServices.swift in Sources */,
 				0CF9EF212FD77CB500FB2C6D /* SkyGlassApp.swift in Sources */,
 				0CFCABB42FD8621D0031F73C /* AppContainer.swift in Sources */,

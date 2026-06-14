@@ -2,25 +2,25 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
-    @Environment(\.appTheme) private var theme
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var themeManager: ThemeManager
+
 
     var body: some View {
         ZStack {
             // MARK: Background
-            Image(theme.backgroundImageName)
+            Image(themeManager.currentTheme.backgroundImageName)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
 
-            theme.backgroundOverlay
+            themeManager.currentTheme.backgroundOverlay
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
                 
                 SearchBarView(
                     text: $viewModel.searchText,
-                    theme: theme,
                     onClear: viewModel.clearSearch
                 )
                 .padding(.horizontal, 20)
@@ -38,7 +38,7 @@ struct SearchView: View {
         if viewModel.isLoading {
             centeredState {
                 ProgressView("Searching...")
-                    .foregroundColor(theme.primaryTextColor)
+                    .foregroundColor(themeManager.currentTheme.primaryTextColor)
             }
         } else if !viewModel.searchResults.isEmpty {
             resultsList
@@ -68,12 +68,12 @@ struct SearchView: View {
 
                     Image(systemName: "location.magnifyingglass")
                 }
-                .foregroundColor(theme.primaryTextColor.opacity(0.6))
+                .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.6))
                 .padding(.horizontal, 10)
                 .padding(.bottom, 4)
 
                 ForEach(viewModel.searchResults) { location in
-                    SearchResultRow(location: location, theme: theme) {
+                    SearchResultRow(location: location) {
                         viewModel.selectLocation(location)
                         dismiss()
                     }
@@ -96,12 +96,12 @@ struct SearchView: View {
         VStack(spacing: 14) {
             Image(systemName: icon)
                 .font(.system(size: 36, weight: .thin))
-                .foregroundColor(theme.primaryTextColor.opacity(0.4))
+                .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.4))
 
             Text(message)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
-                .foregroundColor(theme.primaryTextColor.opacity(0.5))
+                .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.5))
         }
         .padding(.horizontal, 40)
     }

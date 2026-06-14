@@ -2,17 +2,22 @@ import SwiftUI
  
 struct WeatherView: View {
     @StateObject var viewModel: WeatherViewModel
- 
+    @EnvironmentObject private var themeManager: ThemeManager
+    
+    init(viewModel: WeatherViewModel) {
+            _viewModel = StateObject(wrappedValue: viewModel)
+        }
+    
+    
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            // MARK: Background
+        ZStack() {
             Image(viewModel.currentTheme.backgroundImageName)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
                 .transition(.opacity)
  
-            viewModel.currentTheme.backgroundOverlay
+            themeManager.currentTheme.backgroundOverlay
                 .ignoresSafeArea()
  
             if viewModel.isLoading && viewModel.weather == nil {
@@ -22,63 +27,57 @@ struct WeatherView: View {
  
             } else if let weather = viewModel.weather {
                 VStack(spacing: 0) {
-                    HeaderView(cityName: weather.cityName, theme: viewModel.currentTheme)
+                    HeaderView(cityName: weather.cityName)
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         .padding(.bottom, 24)
  
                     ScrollView(showsIndicators: false) {
                         CurrentWeatherSection(
-                            weather: weather,
-                            theme: viewModel.currentTheme
+                            weather: weather
                         )
  
                         if let todayForecast = weather.forecast.first {
                             HourlyForecastSection(
-                                hours: todayForecast.hours,
-                                theme: viewModel.currentTheme
+                                hours: todayForecast.hours
                             )
                             .padding(.top, 10)
                         }
  
                         DailyForecastSection(
-                            days: weather.forecast,
-                            theme: viewModel.currentTheme
+                            days: weather.forecast
                         )
                         .padding(.top, 10)
  
                         WeatherMetricsGrid(
                             weather: weather,
-                            hourlyForecast: weather.forecast.first?.hours ?? [],
-                            theme: viewModel.currentTheme
+                            hourlyForecast: weather.forecast.first?.hours ?? []
                         )
-                        .padding(.top, 10)
+                        .padding(.top, 20)
                         .padding(.bottom, 90)
                     }
                     .padding(.horizontal, 10)
                 }
                 .padding(.horizontal, 20)
- 
-            } else if let error = viewModel.errorMessage {
-                Text("Error: \(error)")
-                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .foregroundColor(themeManager.currentTheme.primaryTextColor)
             }
  
             if viewModel.weather != nil {
                 FavoriteButton(
-                    isFavorite: viewModel.isFavorite,
-                    theme: viewModel.currentTheme
+                    isFavorite: viewModel.isFavorite
                 ) {
                     viewModel.toggleFavorite()
                 }
-                .padding(.leading, 30)
-                .padding(.bottom, 30)
+                .padding(.trailing, 30)
+                .padding(.bottom, 10)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
-        .animation(.easeInOut(duration: 1.0), value: viewModel.currentTheme)
+        .animation(.easeInOut(duration: 1.0), value: themeManager.currentTheme)
         .onAppear {
             viewModel.onAppear()
-        }
+        }.onChange(of: viewModel.currentTheme) { oldTheme, newTheme in
+            themeManager.currentTheme = newTheme
+        }.withGenericError(errorMessage: $viewModel.errorMessage)
     }
 }

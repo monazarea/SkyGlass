@@ -13,18 +13,18 @@ struct SplashView: View {
     @State private var size = 0.8
     @State private var opacity = 0.5
     
-    private let theme: AppTheme = .sunny
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         
             ZStack {
                 // MARK: App Background
-                Image(theme.backgroundImageName)
+                Image(themeManager.currentTheme.backgroundImageName)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
                 
-                theme.backgroundOverlay
+                themeManager.currentTheme.backgroundOverlay
                     .ignoresSafeArea()
                 
                 // MARK: Glassmorphism Logo Card
@@ -36,12 +36,11 @@ struct SplashView: View {
                     
                     Text("SkyGlass")
                         .font(.system(size: 36, weight: .bold, design: .rounded))
-                        .foregroundColor(theme.primaryTextColor)
+                        .foregroundColor(themeManager.currentTheme.primaryTextColor)
                         .tracking(3)
                 }
                 .padding(40)
-                // 👈 هنا استخدمنا الستايل الزجاجي بتاعك عشان تندمج مع التطبيق
-                .glassStyle(cornerRadius: 30, theme: theme, opacity: 0.3)
+                .glassStyle(cornerRadius: 30, opacity: 0.3)
                 .scaleEffect(size)
                 .opacity(opacity)
                 .onAppear {

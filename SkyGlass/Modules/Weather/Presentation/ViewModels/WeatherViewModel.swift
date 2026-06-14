@@ -7,33 +7,50 @@ final class WeatherViewModel: ObservableObject {
     @Published var isLoading : Bool = false
     @Published var errorMessage : String? = nil
     @Published var weather : WeatherEntity? = nil
-    @Published var isSaved : Bool = false
     @Published var currentTheme: AppTheme = .sunny
     @Published var isFavorite: Bool = false
     private var cancellables = Set<AnyCancellable>()
 
     private let weatherUseCase : WeatherUseCaseProtocol
     private var currentCoordinates : Coordinate?
-    private var locationService : LocationServiceProtocol
+    private var locationUseCase : LocationUseCaseProtocol
     private let favoritesRepository: FavoritesRepositoryProtocol
-    init(weatherUseCase :WeatherUseCaseProtocol, locationService: LocationServiceProtocol,favoritesRepository: FavoritesRepositoryProtocol){
+    init(weatherUseCase :WeatherUseCaseProtocol, locationUseCase: LocationUseCaseProtocol,favoritesRepository: FavoritesRepositoryProtocol){
         self.weatherUseCase = weatherUseCase
-        self.locationService = locationService
+        self.locationUseCase = locationUseCase
         self.favoritesRepository = favoritesRepository
         setupLocationListener()
+        setupFavoritesListener()
     }
     private func setupLocationListener() {
-            locationService.coordinatePublisher
+            locationUseCase.coordinatePublisher
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newCoordinate in
+                print("🚀 Location received in WeatherViewModel: \(newCoordinate)")
+                self?.fetchWeather(for: newCoordinate)
+            }
+            .store(in: &cancellables)
+        }
+    private func setupFavoritesListener() {
+            favoritesRepository.favoritesPublisher
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] newCoordinate in
-                    self?.fetchWeather(for: newCoordinate)
+                .sink { [weak self] _ in
+                    guard let self = self, let currentWeather = self.weather else { return }
+                    
+                    do {
+                        self.isFavorite = try self.favoritesRepository.isFavorite(id: Int(currentWeather.id))
+                    } catch {
+                        print("Error checking favorite status: \(error)")
+                    }
                 }
                 .store(in: &cancellables)
         }
     
     func onAppear(){
+        guard weather == nil else { return }
         self.isLoading = true
-        locationService.requestDeviceLocation()
+        locationUseCase.requestDeviceLocation()
         
     }
     
@@ -41,17 +58,15 @@ final class WeatherViewModel: ObservableObject {
         currentCoordinates = coordinate
         self.isLoading = true
         self.errorMessage = nil
-        
         Task{
+            defer { self.isLoading = false }
             do{
                 let fetchedWeather = try await weatherUseCase.execute(coordinate: coordinate)
                 self.weather = fetchedWeather
                 self.currentTheme = AppTheme.getTheme(conditionCode: fetchedWeather.conditionCode, isDay: fetchedWeather.isDay)
                 self.isFavorite = try favoritesRepository.isFavorite(id: Int(fetchedWeather.id))
-                self.isLoading = false
             }catch{
                 self.errorMessage = error.localizedDescription
-                self.isLoading = false
             }
         }
         
@@ -81,7 +96,6 @@ final class WeatherViewModel: ObservableObject {
                     try favoritesRepository.addFavorite(newFavorite)
                 }
                 
-                isFavorite.toggle()
                 
             } catch {
                 self.errorMessage = "Failed to update favorites: \(error.localizedDescription)"

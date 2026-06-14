@@ -7,10 +7,10 @@ struct MetricCardView: View {
     let title: String
     let value: String
     let subtext: String
-    let theme: AppTheme
     let chartData: [ChartDataPoint]
     let chartColor: Color
-    
+    @EnvironmentObject private var themeManager: ThemeManager
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             
@@ -21,18 +21,18 @@ struct MetricCardView: View {
                     .fontWeight(.bold)
                     .tracking(1.0)
             }
-            .foregroundColor(theme.primaryTextColor.opacity(0.6))
+            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.6))
             .padding(.bottom, 8)
             
             Text(value)
                 .font(.system(size: 28, weight: .semibold, design: .rounded))
-                .foregroundColor(theme.primaryTextColor)
+                .foregroundColor(themeManager.currentTheme.primaryTextColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             
             Text(subtext)
                 .font(.caption)
-                .foregroundColor(theme.primaryTextColor.opacity(0.7))
+                .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.7))
                 .lineLimit(2)
                 .padding(.top, 4)
             
@@ -45,6 +45,6 @@ struct MetricCardView: View {
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: 180)
-        .glassStyle(cornerRadius: 24, theme: theme, opacity: 0.6)
+        .glassStyle(cornerRadius: 24, opacity: 0.6)
     }
 }

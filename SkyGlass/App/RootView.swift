@@ -11,7 +11,7 @@ struct RootView: View {
     let container: AppContainer
     @StateObject private var viewModel = RootViewModel()
     @StateObject private var appRouter = AppRouter()
-    
+    @StateObject private var themeManager = ThemeManager()
     var body: some View {
         Group{
             switch viewModel.currentState {
@@ -20,9 +20,11 @@ struct RootView: View {
             case .ready:
                 MainContentView(container: container)
                     .environmentObject(appRouter)
+                   
             }
         }
         .animation(.easeInOut(duration: 0.5), value: viewModel.currentState)
+        .environmentObject(themeManager)
         
         
     }
@@ -30,7 +32,7 @@ struct RootView: View {
     struct MainContentView: View {
         let container: AppContainer
         @EnvironmentObject var appRouter: AppRouter
-        
+            
         var body: some View {
             NavigationStack(path: $appRouter.path) {
                 WeatherView(viewModel: container.makeWeatherViewModel())
@@ -42,13 +44,13 @@ struct RootView: View {
                             SearchView(viewModel: container.makeSearchViewModel())
                         case .favorites:
                             FavoriteView(viewModel: container.makeFavoritesViewModel())
-                        case .fullForecast(let days, let theme):
-                            FullDailyForecastView(days: days, theme: theme)
+                        case .fullForecast(let days):
+                            FullDailyForecastView(days: days)
                                             
                         }
                         
                     }
-            }.environment(\.appTheme, container.makeWeatherViewModel().currentTheme)
+            }
         }
     }
 

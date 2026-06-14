@@ -10,43 +10,42 @@ import SwiftUI
 struct CurrentWeatherSection: View {
     
     let weather : WeatherEntity
-    let theme: AppTheme
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         VStack(spacing: 8) {
-            HStack {
-                Image(systemName: "mappin.and.ellipse")
+         
                 Text(weather.country.uppercased())
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .tracking(2)
-            }
-            .foregroundColor(theme.primaryTextColor.opacity(0.8))
+            
+            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.8))
             
             
                 Text("\(Int(weather.tempC))°")
                     .font(.system(size: 96, weight: .bold, design: .rounded))
-                    .foregroundColor(theme.primaryTextColor)
+                    .foregroundColor(themeManager.currentTheme.primaryTextColor)
 
             }
             
             Text(weather.conditionText)
                 .font(.title2)
                 .fontWeight(.medium)
-                .foregroundColor(theme.primaryTextColor)
+                .foregroundColor(themeManager.currentTheme.primaryTextColor)
             
             HStack(spacing: 12) {
                 Text("Feels like \(Int(weather.feelsLikeC))°")
-                Divider().frame(height: 15).background(theme.primaryTextColor)
+                Divider().frame(height: 15).background(themeManager.currentTheme.primaryTextColor)
                 Text("H:\(Int(30))°  L:\(Int(10))°")
             }
             .font(.subheadline)
-            .foregroundColor(theme.primaryTextColor.opacity(0.8))
+            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.8))
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
             .overlay(
                 Capsule()
-                    .stroke(theme.primaryTextColor.opacity(0.3), lineWidth: 1)
+                    .stroke(themeManager.currentTheme.primaryTextColor.opacity(0.3), lineWidth: 1)
             )
         }
     }
@@ -55,6 +54,6 @@ struct CurrentWeatherSection: View {
     ZStack {
         Color.indigo.ignoresSafeArea()
         
-        CurrentWeatherSection(weather: WeatherEntity.mock, theme: .clearNight)
+        CurrentWeatherSection(weather: WeatherEntity.mock)
     }
 }

@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HourlyForecastSection: View {
     let hours: [HourEntity]
-    let theme: AppTheme
-    
+    @EnvironmentObject private var themeManager: ThemeManager
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             
@@ -24,13 +23,13 @@ struct HourlyForecastSection: View {
                 
                 Image(systemName: "clock")
             }
-            .foregroundColor(theme.primaryTextColor.opacity(0.6))
+            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.6))
             .padding(.horizontal, 10)
             .padding(.top, 10)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(hours, id: \.time) { hour in
-                        HourlyCardView(hour: hour, theme: theme)
+                        HourlyCardView(hour: hour)
                     }
                 }
                 .padding(.horizontal, 10)
@@ -41,7 +40,8 @@ struct HourlyForecastSection: View {
 
 struct HourlyCardView: View {
     let hour: HourEntity
-    let theme: AppTheme
+    @EnvironmentObject private var themeManager: ThemeManager
+
     
     var body: some View {
         VStack(spacing: 12) {
@@ -62,11 +62,11 @@ struct HourlyCardView: View {
             Text("\(Int(hour.tempC))°")
                 .font(.title3)
         }
-        .foregroundColor(theme.primaryTextColor)
+        .foregroundColor(themeManager.currentTheme.primaryTextColor)
         .padding(.vertical, 16)
         .padding(.horizontal, 18)
         
-        .glassStyle(cornerRadius: 24, theme: theme, opacity: 0.6)
+        .glassStyle(cornerRadius: 24,  opacity: 0.6)
     }
     
     private func formatTime(_ timeString: String) -> String {
@@ -84,6 +84,6 @@ struct HourlyCardView: View {
     ZStack {
         Color.blue.opacity(0.8).ignoresSafeArea()
         
-        HourlyForecastSection(hours: HourEntity.mockArray, theme: .sunny)
+        HourlyForecastSection(hours: HourEntity.mockArray)
     }
 }

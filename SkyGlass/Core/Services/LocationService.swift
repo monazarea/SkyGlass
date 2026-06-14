@@ -8,7 +8,7 @@ import CoreLocation
 import Foundation
 import Combine
 protocol LocationServiceProtocol {
-    var coordinatePublisher: AnyPublisher<Coordinate, Never> { get }
+    var coordinatePublisher: AnyPublisher<Coordinate?, Never> { get }
     func requestDeviceLocation()
     func updateCustomLocation(_ coordinate: Coordinate)
 }
@@ -16,8 +16,8 @@ protocol LocationServiceProtocol {
 
 final class LocationService: NSObject, LocationServiceProtocol, CLLocationManagerDelegate {
     
-    private let coordinateSubject = PassthroughSubject<Coordinate, Never>()
-    var coordinatePublisher: AnyPublisher<Coordinate, Never> {
+    private let coordinateSubject = PassthroughSubject<Coordinate?, Never>()
+    var coordinatePublisher: AnyPublisher<Coordinate?, Never> {
             return coordinateSubject.eraseToAnyPublisher()
         }
     
@@ -41,11 +41,11 @@ final class LocationService: NSObject, LocationServiceProtocol, CLLocationManage
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
             case .restricted, .denied:
-                sendFallbackLocation()
+                coordinateSubject.send(nil)
             case .authorizedAlways, .authorizedWhenInUse:
                 locationManager.requestLocation()
             @unknown default:
-                sendFallbackLocation()
+                coordinateSubject.send(nil)
             }
         }
     
@@ -55,7 +55,7 @@ final class LocationService: NSObject, LocationServiceProtocol, CLLocationManage
             if status == .authorizedWhenInUse || status == .authorizedAlways {
                 manager.requestLocation()
             } else if status == .denied || status == .restricted {
-                sendFallbackLocation()
+                coordinateSubject.send(nil)
             }
         }
         
@@ -68,12 +68,9 @@ final class LocationService: NSObject, LocationServiceProtocol, CLLocationManage
         
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             if let clError = error as? CLError, clError.code == .locationUnknown { return }
-            sendFallbackLocation()
+            coordinateSubject.send(nil)
         }
         
         
-        private func sendFallbackLocation() {
-            let fallback = Coordinate(lat: 29.9718, lon: 30.9450)
-            coordinateSubject.send(fallback)
-        }
+       
 }

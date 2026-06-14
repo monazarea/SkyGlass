@@ -8,7 +8,7 @@
 import SwiftUI
 struct FavoriteButton: View {
     let isFavorite: Bool
-    let theme: AppTheme
+    @EnvironmentObject private var themeManager: ThemeManager
     let action: () -> Void
  
     var body: some View {
@@ -20,7 +20,7 @@ struct FavoriteButton: View {
                     .overlay(
                         Circle()
                             .stroke(
-                                theme.primaryTextColor.opacity(isFavorite ? 0.6 : 0.25),
+                                themeManager.currentTheme.primaryTextColor.opacity(isFavorite ? 0.6 : 0.25),
                                 lineWidth: 1
                             )
                     )
@@ -29,8 +29,8 @@ struct FavoriteButton: View {
                     .font(.system(size: 26, weight: .medium))
                     .foregroundColor(
                         isFavorite
-                            ? theme.primaryTextColor
-                            : theme.primaryTextColor.opacity(0.7)
+                            ? themeManager.currentTheme.primaryTextColor
+                            : themeManager.currentTheme.primaryTextColor.opacity(0.7)
                     )
                     .scaleEffect(isFavorite ? 1.1 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFavorite)

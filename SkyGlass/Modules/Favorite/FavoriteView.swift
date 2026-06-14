@@ -7,18 +7,17 @@ import SwiftUI
 
 struct FavoriteView: View {
     @StateObject var viewModel: FavoritesViewModel
-    @Environment(\.appTheme) private var theme
+    @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
-            // MARK: Background
-            Image(theme.backgroundImageName)
+            Image(themeManager.currentTheme.backgroundImageName)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
 
-            theme.backgroundOverlay
+            themeManager.currentTheme.backgroundOverlay
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -27,7 +26,7 @@ struct FavoriteView: View {
                         .font(.caption)
                         .fontWeight(.bold)
                         .tracking(1.5)
-                        .foregroundColor(theme.primaryTextColor.opacity(0.6))
+                        .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.6))
 
                     Spacer()
 
@@ -36,9 +35,9 @@ struct FavoriteView: View {
                     } label: {
                         Image(systemName: "xmark")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(theme.primaryTextColor.opacity(0.6))
+                            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.6))
                             .padding(10)
-                            .glassStyle(cornerRadius: 12, theme: theme, opacity: 0.4)
+                            .glassStyle(cornerRadius: 12, opacity: 0.4)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -50,32 +49,38 @@ struct FavoriteView: View {
                         Spacer()
                         Image(systemName: "heart.slash")
                             .font(.system(size: 36, weight: .thin))
-                            .foregroundColor(theme.primaryTextColor.opacity(0.4))
+                            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.4))
                         
                         Text("No saved locations yet.\nSearch for a city to add it here.")
                             .font(.subheadline)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(theme.primaryTextColor.opacity(0.5))
+                            .foregroundColor(themeManager.currentTheme.primaryTextColor.opacity(0.5))
                         Spacer()
                     }
                 } else {
-                    List {
-                        ForEach(viewModel.favorites) { location in
-                            Button {
-                                viewModel.selectFavorite(location)
-                                dismiss()
-                            } label: {
-                                FavoriteRow(location: location, theme: theme)
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 12) {
+                            ForEach(viewModel.favorites) { location in
+                                FavoriteRow(
+                                    location: location,
+                                    onSelect: {
+                                        viewModel.selectFavorite(location)
+                                        dismiss()
+                                    },
+                                    onDelete: {
+                                        withAnimation {
+                                            viewModel.removeFavorite(id: location.id)
+                                        }
+                                    }
+                                )
                             }
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
                         }
-                        .onDelete(perform: deleteFavorite)
+                        .padding(.horizontal, 20) 
+                        .padding(.top, 10)
+                        .padding(.bottom, 30)
                     }
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
                 }
-            }
+            }.padding(10)
         }
         .toolbar(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
@@ -84,36 +89,42 @@ struct FavoriteView: View {
         }
     }
 
-    private func deleteFavorite(at offsets: IndexSet) {
-        for index in offsets {
-            let location = viewModel.favorites[index]
-            viewModel.removeFavorite(id: location.id)
-        }
-    }
+    
 }
 
 struct FavoriteRow: View {
     let location: FavoriteLocation
-    let theme: AppTheme
+    let onSelect: () -> Void
+    let onDelete: () -> Void
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(location.cityName)
-                    .font(.headline)
-                    .foregroundColor(theme.primaryTextColor)
-                
-                Text(location.country)
-                    .font(.subheadline)
-                    .foregroundColor(theme.primaryTextColor.opacity(0.6))
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(location.cityName)
+                        .font(.headline)
+                    
+                    Text(location.country)
+                        .font(.subheadline)
+                }
+                Spacer()
             }
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(theme.primaryTextColor.opacity(0.4))
-                .font(.system(size: 14, weight: .bold))
+            .contentShape(Rectangle())
+            .onTapGesture {
+                onSelect()
+            }
+            
+            Button {
+                onDelete()
+            } label: {
+                Image(systemName: "trash.fill")
+                    .foregroundColor(.red.opacity(0.8))
+                    .font(.system(size: 18))
+                    .padding(.leading, 12)
+                    .padding(.vertical, 8)
+            }
         }
         .padding(16)
-        .glassStyle(cornerRadius: 16, theme: theme, opacity: 0.3)
-        .padding(.vertical, 4)
+        .glassStyle(cornerRadius: 16, opacity: 0.3)
     }
 }

@@ -1,60 +1,45 @@
-//
-//  FavoritesRepository.swift
-//  SkyGlass
-//
-//  Created by Mona Zarea on 11/06/2026.
-//
-
-
-
 import Foundation
-import SwiftData
+import Combine
+
 protocol FavoritesRepositoryProtocol {
-    func fetchFavorites() throws -> [FavoriteLocation]
+    var favoritesPublisher: AnyPublisher<[FavoriteLocation], Never> { get }
+    
+    func refreshFavorites() throws
     func addFavorite(_ location: FavoriteLocation) throws
-    func removeFavorite(_ location: FavoriteLocation) throws
-    func isFavorite(id: Int) throws -> Bool
     func removeFavorite(id: Int) throws
+    func isFavorite(id: Int) throws -> Bool
 }
 
-@MainActor
 final class FavoritesRepository: FavoritesRepositoryProtocol {
+    private let localService: FavoritesLocalServiceProtocol
     
-    private let context: ModelContext
+    private let favoritesSubject = CurrentValueSubject<[FavoriteLocation], Never>([])
     
-    init(context: ModelContext) {
-        self.context = context
+    var favoritesPublisher: AnyPublisher<[FavoriteLocation], Never> {
+        return favoritesSubject.eraseToAnyPublisher()
     }
     
-    func fetchFavorites() throws -> [FavoriteLocation] {
-        let descriptor = FetchDescriptor<FavoriteLocation>(sortBy: [SortDescriptor(\.savedAt, order: .reverse)])
-        return try context.fetch(descriptor)
+    init(localService: FavoritesLocalServiceProtocol) {
+        self.localService = localService
+        try? refreshFavorites()
+    }
+    
+    func refreshFavorites() throws {
+        let favs = try localService.fetchFavorites()
+        favoritesSubject.send(favs)
     }
     
     func addFavorite(_ location: FavoriteLocation) throws {
-        context.insert(location)
-        try context.save()
+        try localService.insertFavorite(location)
+        try refreshFavorites()
     }
     
-    func removeFavorite(_ location: FavoriteLocation) throws {
-        context.delete(location)
-        try context.save()
-    }
     func removeFavorite(id: Int) throws {
-            let descriptor = FetchDescriptor<FavoriteLocation>(
-                predicate: #Predicate { $0.id == id }
-            )
-            if let itemToDelete = try context.fetch(descriptor).first {
-                context.delete(itemToDelete)
-                try context.save()
-            }
-        }
+        try localService.deleteFavorite(id: id)
+        try refreshFavorites()
+    }
     
     func isFavorite(id: Int) throws -> Bool {
-        let descriptor = FetchDescriptor<FavoriteLocation>(
-            predicate: #Predicate { $0.id == id }
-        )
-        let count = try context.fetchCount(descriptor)
-        return count > 0
+        return try localService.isFavorite(id: id)
     }
 }

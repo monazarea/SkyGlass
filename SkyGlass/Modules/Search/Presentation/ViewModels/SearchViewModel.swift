@@ -24,7 +24,7 @@ final class SearchViewModel: ObservableObject {
     private let locationService: LocationServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
-    init(searchUseCase: SearchLocationsUseCase, locationService: LocationServiceProtocol) {
+    init(searchUseCase: SearchLocationsUseCaseProtocol, locationService: LocationServiceProtocol) {
             self.searchUseCase = searchUseCase
             self.locationService = locationService
             setupSearchDebounce()

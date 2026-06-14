@@ -10,11 +10,12 @@ import SwiftUI
 struct HeaderView: View {
     let cityName: String
     @EnvironmentObject var appRouter: AppRouter
-    let theme : AppTheme
+    @EnvironmentObject private var themeManager: ThemeManager
+   
     var body: some View {
         HStack {
             Button(action: { appRouter.navigate(to: .favorites)}) {
-                Image(systemName: "line.3.horizontal")
+                Image(systemName: "mappin.and.ellipse")
                     .font(.title2)
             }
             
@@ -31,7 +32,7 @@ struct HeaderView: View {
                     .font(.title2)
             }
         }
-        .foregroundColor(theme.primaryTextColor)
+        .foregroundColor(themeManager.currentTheme.primaryTextColor)
     }
 }
 
