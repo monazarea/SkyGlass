@@ -22,6 +22,12 @@ jobs:
         with:
           xcode-version: '16.4' # Matches your local Xcode 16.4
 
-      # Step 3: Run your Fastlane magic!
+      # Step 3: Create dummy config file to bypass gitignore
+      - name: Generate Local Config
+        run: |
+          mkdir -p Config
+          touch Config/SkyGlass-Local.xcconfig
+
+      # Step 4: Run your Fastlane magic!
       - name: Run Fastlane Build
         run: fastlane build_skyglass
