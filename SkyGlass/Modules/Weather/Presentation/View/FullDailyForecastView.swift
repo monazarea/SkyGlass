@@ -58,9 +58,10 @@ struct FullDailyForecastView: View {
         .toolbarColorScheme(themeManager.currentTheme.primaryTextColor == .white ? .dark : .light, for: .navigationBar)
     }
 }
-
+#if DEBUG
 #Preview {
     NavigationView {
         FullDailyForecastView(days: DayEntity.mockArray)
     }
 }
+#endif

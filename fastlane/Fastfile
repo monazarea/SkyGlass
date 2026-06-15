@@ -1,0 +1,16 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build the app for Simulator to test CI/CD pipeline"
+  lane :build_skyglass do
+    
+    increment_build_number
+    
+    build_app(
+      scheme: "SkyGlass",
+      destination: "generic/platform=iOS Simulator",
+      skip_package_ipa: true
+    )
+    
+  end
+end

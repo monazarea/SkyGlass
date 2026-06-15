@@ -79,7 +79,7 @@ struct HourlyCardView: View {
         return timeString
     }
 }
-
+#if DEBUG
 #Preview {
     ZStack {
         Color.blue.opacity(0.8).ignoresSafeArea()
@@ -87,3 +87,4 @@ struct HourlyCardView: View {
         HourlyForecastSection(hours: HourEntity.mockArray)
     }
 }
+#endif

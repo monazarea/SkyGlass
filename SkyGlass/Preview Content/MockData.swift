@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+#if DEBUG
 // MARK: - Hour Entity Mock
 // MARK: - Hour Entity Mock
 extension HourEntity {
@@ -101,3 +101,4 @@ extension SearchLocationEntity {
     
     static let mockArray = [mockCairo, mockAlex, mockLondon]
 }
+#endif

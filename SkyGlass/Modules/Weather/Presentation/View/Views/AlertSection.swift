@@ -14,36 +14,32 @@ struct AlertSection: View {
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
             
-            // 1. أيقونة التنبيه
             Image(systemName: "exclamationmark.triangle")
                 .font(.title3)
-                .foregroundColor(.teal) // اللون السماوي/الأخضر اللي في الديزاين
+                .foregroundColor(.teal)
             
-            // 2. النصوص
             VStack(alignment: .leading, spacing: 6) {
                 Text("WEATHER ALERT")
                     .font(.caption)
                     .fontWeight(.bold)
-                    .tracking(1.5) // المسافة بين الحروف عشان تدي شكل عصري
+                    .tracking(1.5)
                     .foregroundColor(theme.primaryTextColor.opacity(0.6))
                 
                 Text(alertText)
                     .font(.subheadline)
-                    .lineSpacing(4) // مسافة بين السطور للقراءة المريحة
+                    .lineSpacing(4)
                     .foregroundColor(theme.primaryTextColor)
-                    .fixedSize(horizontal: false, vertical: true) // عشان النص ينزل على سطرين لو طويل براحته
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        // 3. تأثير الـ Glassmorphism هنا 🪞
         .background(.ultraThinMaterial)
-        // 💡 السطر ده سحر: بيخلي الزجاج يقلب غامق لو احنا بالليل وفاتح لو بالنهار!
         .environment(\.colorScheme, theme.primaryTextColor == .white ? .dark : .light)
         .cornerRadius(20)
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(theme.primaryTextColor.opacity(0.15), lineWidth: 1) // إطار خفيف جداً
+                .stroke(theme.primaryTextColor.opacity(0.15), lineWidth: 1) 
         )
     }
 }

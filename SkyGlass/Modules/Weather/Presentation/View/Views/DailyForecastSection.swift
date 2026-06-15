@@ -93,7 +93,7 @@ struct DailyRowView: View {
         }
     }
 }
-
+#if DEBUG
 #Preview {
     ZStack {
         Color.indigo.ignoresSafeArea()
@@ -101,3 +101,4 @@ struct DailyRowView: View {
             .padding()
     }
 }
+#endif

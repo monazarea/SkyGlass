@@ -49,7 +49,7 @@ struct CurrentWeatherSection: View {
             )
         }
     }
-
+#if DEBUG
 #Preview {
     ZStack {
         Color.indigo.ignoresSafeArea()
@@ -57,3 +57,4 @@ struct CurrentWeatherSection: View {
         CurrentWeatherSection(weather: WeatherEntity.mock)
     }
 }
+#endif

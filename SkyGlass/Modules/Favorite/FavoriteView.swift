@@ -96,7 +96,7 @@ struct FavoriteRow: View {
     let location: FavoriteLocation
     let onSelect: () -> Void
     let onDelete: () -> Void
-    
+    @State private var showingDeleteAlert = false
     var body: some View {
         HStack {
             HStack {
@@ -115,10 +115,10 @@ struct FavoriteRow: View {
             }
             
             Button {
-                onDelete()
+                showingDeleteAlert = true
             } label: {
                 Image(systemName: "trash.fill")
-                    .foregroundColor(.red.opacity(0.8))
+                    .foregroundColor(.gray.opacity(0.8))
                     .font(.system(size: 18))
                     .padding(.leading, 12)
                     .padding(.vertical, 8)
@@ -126,5 +126,13 @@ struct FavoriteRow: View {
         }
         .padding(16)
         .glassStyle(cornerRadius: 16, opacity: 0.3)
+        .alert("Remove Location", isPresented: $showingDeleteAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Delete", role: .destructive) {
+                        onDelete() 
+                    }
+                } message: {
+                    Text("Are you sure you want to remove \(location.cityName) from your favorites?")
+                }
     }
 }

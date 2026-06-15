@@ -32,7 +32,7 @@ extension String {
                 return "Today"
             }
             
-            formatter.dateFormat = "EEE" // بتجيب أول 3 حروف من اسم اليوم
+            formatter.dateFormat = "EEE"
             return formatter.string(from: date)
         }
 }
