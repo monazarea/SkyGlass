@@ -42,6 +42,44 @@ To empower travelers, commuters, and weather-sensitive professionals with an int
 
 ---
 
+## 🎨 Theme Diversity & Weather Dynamics
+
+SkyGlass implements a highly responsive and dynamic styling system that adjusts the application's appearance based on real-time weather conditions and time-of-day info. 
+
+Instead of a basic light/dark switch, the app uses **8 context-aware theme modes** to reflect the weather outside, which are propagated through the SwiftUI hierarchy via Custom Environment Keys (`EnvironmentValues.appTheme`).
+
+### 🌈 Weather Themes
+The app maps WeatherAPI condition codes and daytime flags directly to specific `AppTheme` presets:
+
+*   ☀️ **Sunny:** Vibrant warm orange accents and high-contrast, light overlays for daytime clarity.
+*   🌌 **Clear Night:** Deep indigo gradients and dark overlays for soothing night usage.
+*   🌥️ **Cloudy (Day/Night):** Muted slate grey colors, adapting contrast based on the sun's position.
+*   🌧️ **Rainy (Day/Night):** Cool blue and rich midnight tones to replicate storm conditions.
+*   ❄️ **Snowy (Day/Night):** Soft cyan highlights and white/grey overlays simulating frozen environments.
+
+### ⚙️ How Theme Propagation Works
+
+1. **State Observation:** The `ThemeManager` acts as a `@MainActor`-isolated `ObservableObject` tracking the active `currentTheme`.
+2. **Context Injection:** The root view injects the theme into the SwiftUI Environment:
+   ```swift
+   RootView(container: appContainer)
+       .environment(\.appTheme, themeManager.currentTheme)
+   ```
+3. **Dynamic Styling:** Any child view (e.g., `WeatherView`, `SearchView`) can seamlessly read the active theme and retrieve styling properties:
+   ```swift
+   struct WeatherView: View {
+       @Environment(\.appTheme) private var theme: AppTheme
+       
+       var body: some View {
+           VStack { ... }
+               .foregroundColor(theme.primaryTextColor)
+               .background(Image(theme.backgroundImageName).resizable())
+       }
+   }
+   ```
+
+---
+
 ## 📸 Screenshots
 
 | Splash Screen | Location Search | Forecast View | Favorites Board |
